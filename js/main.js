@@ -1,97 +1,93 @@
-let buttons = document.querySelectorAll(".square");
+const allSquares = document.querySelectorAll(".square");
+const player = document.querySelector("#turn");
 
-let xTurn = true;
-let myArray = ["", "", "", "", "", "", "", "", ""];
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (xTurn && button.innerHTML == "") {
-      button.innerHTML = "x";
-      button.disabled = true;
-      xTurn = false;
-      document.getElementById("turn").innerHTML = "Player X";
-      myArray.push(button.innerText);
-    } else {
-      if (button.innerHTML == "") {
-        button.innerHTML = "o";
-        xTurn = true;
-        button.disabled = true;
-        document.getElementById("turn").innerHTML = "Player O";
-        myArray.push(button.innerText);
-      }
+let boardArray = ["", "", "", "", "", "", "", "", ""];
+const winnerArray = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+let currentTurn = "X";
+allSquares.forEach((square) => {
+  square.addEventListener("click", () => {
+    let value = square.getAttribute("value");
+    let index = value - 1;
+    let allSquaresContent = document.querySelector(`.square[value="${value}"]`);
+
+    boardArray[index] = currentTurn;
+
+    if (square.innerHTML === "" && currentTurn === "X") {
+      square.innerHTML = "X";
+      player.innerHTML = "Player O";
+      currentTurn = "O";
+    } else if (square.innerHTML === "" && currentTurn === "O") {
+      square.innerHTML = "O";
+      player.innerHTML = "Player X";
+      currentTurn = "X";
     }
+
     checkWinner();
+    checkDraw();
+
+    if (currentTurn === "X") {
+      allSquaresContent.style.backgroundColor = "red";
+    } else if (currentTurn === "O") {
+      allSquaresContent.style.backgroundColor = "blue";
+    }
   });
 });
 
 function checkWinner() {
-  if (
-    myArray[0] == myArray[1] &&
-    myArray[0] == myArray[2] &&
-    myArray[0] != ""
-  ) {
-    declareWinner(myArray[0]);
-  } else if (
-    myArray[3] == myArray[4] &&
-    myArray[3] == myArray[5] &&
-    myArray[3] != ""
-  ) {
-    declareWinner(myArray[3]);
-  } else if (
-    myArray[6] == myArray[7] &&
-    myArray[6] == myArray[8] &&
-    myArray[6] != ""
-  ) {
-    declareWinner(myArray[6]);
-  } else if (
-    myArray[0] == myArray[3] &&
-    myArray[0] == myArray[6] &&
-    myArray[0] != ""
-  ) {
-    declareWinner(myArray[0]);
-  } else if (
-    myArray[1] == myArray[4] &&
-    myArray[1] == myArray[7] &&
-    myArray[1] != ""
-  ) {
-    declareWinner(myArray[1]);
-  } else if (
-    myArray[2] == myArray[5] && 
-    myArray[2] == myArray[8] &&
-    myArray[2] != ""
-  ) {
-    declareWinner(myArray[2]);
-  } else if (
-    myArray[0] == myArray[4] && 
-    myArray[0] == myArray[8] &&
-    myArray[0] != ""
-  ) {
-    declareWinner(myArray[0]);
-  } else if (
-    myArray[2] == myArray[4] &&
-    myArray[2] == myArray[6] &&
-    myArray[2] != ""
-  ) {
-    declareWinner(myArray[2]);
-  } else if (myArray.length == 9) {
-    declareWinner();
+  for (let i = 0; i < winnerArray.length; i++) {
+    let win = winnerArray[i];
+    if (
+      boardArray[win[0]] === boardArray[win[1]] &&
+      boardArray[win[1]] === boardArray[win[2]] &&
+      boardArray[win[0]] !== ""
+    ) {
+      declareWinner(boardArray[win[0]]);
+      setTimeout(() => {
+        reset();
+      }, 1000);
+      return;
+    }
+  }
+}
+function checkDraw() {
+  if (boardArray.indexOf("") === -1 && !checkWinner()) {
+    document.querySelector(
+      "h1"
+    ).innerHTML = `Draw! <i class="em em-handshake" aria-role="presentation" aria-label="HANDSHAKE"></i>`;
+    document.querySelector("h1").style.backgroundColor = "Gray";
   }
 }
 
 function declareWinner(winner) {
-  if (winner == "x") {
-    document.getElementById("turn").innerHTML = "Player X won";
-  } else if (winner == "o") {
-    document.getElementById("turn").innerHTML = "Player O won";
-  } else {
-    document.getElementById("turn").innerHTML = "DRAW";
+  if (winner === "X") {
+    document.getElementById(
+      "turn"
+    ).innerHTML = `X Has won <i class="em em-boom" aria-role="presentation" aria-label="COLLISION SYMBOL"></i>  `;
+  } else if (winner === "O") {
+    document.getElementById(
+      "turn"
+    ).innerHTML = `O Has won <i class="em em-boom" aria-role="presentation" aria-label="COLLISION SYMBOL"></i>`;
   }
-// reset button
-const reset = document.querySelector("button");
+}
 
-reset.addEventListener("click", () => {
-  buttons.forEach((button) => {
-    button.innerHTML = "";
-    button.disabled = false;
+// reset button
+document.querySelector("button").addEventListener("click", reset());
+
+function reset() {
+  allSquares.forEach((square) => {
+    square.innerHTML = "";
+    player.innerHTML = "Player X";
+    currentTurn = "X";
+    boardArray = ["", "", "", "", "", "", "", "", ""];
+    document.querySelector("h1").innerHTML = "Tic-tac-toe";
   });
-  xTurn = true;
-});
+}
