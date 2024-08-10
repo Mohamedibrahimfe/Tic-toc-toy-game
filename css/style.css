@@ -3,4 +3,89 @@ body{
     color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.title{
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    line-height: 2em;
+    width: 40%;
+    font-size: 1.5em;
+    margin: auto;
+    transition: all 0.5s ease;
+}
+.title:hover{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.out-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    padding: 15px;
+    border-radius: 30px;
+    line-height: 2em;
+    width: 40%;
+    font-size: 1.5em;
+    margin: auto;
+}
+.card .player{
+    font-weight: bold;
+    background-color: rgba(240, 255, 255, 0.241);
+    padding: 15px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+.card #turn{
+    font-weight: bold;
+    /* background-color: rgba(240, 255, 255, 0.241); */
+    padding: 15px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+.all-squeres{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    transition: all 0.5s ease;
+}
+.square{
+    width: 150px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.square:hover{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+button{
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 30px;
+    width: 40%;
+    font-size: 1.5em;
+    margin: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+button:hover{
+    background-color: rgba(255, 255, 255, 0.5);
 }
