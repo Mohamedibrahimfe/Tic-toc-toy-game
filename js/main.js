@@ -1,6 +1,7 @@
 const allSquares = document.querySelectorAll(".square");
 const player = document.querySelector("#turn");
-let boardArray = Array(9).fill("");
+const autoplayCheckbox = document.querySelector("#autoplay");
+let boardArray = ["", "", "", "", "", "", "", "", ""];
 const winnerArray = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8],
   [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -13,7 +14,7 @@ allSquares.forEach((square) => {
   square.addEventListener("click", () => {
     if (gameHasEnded || square.innerHTML !== "") return;
 
-    const index = square.getAttribute("value") - 1;
+    let index = square.getAttribute("value") - 1;
     boardArray[index] = currentTurn;
     square.innerHTML = currentTurn;
     player.innerHTML = `Player ${currentTurn === "X" ? "O" : "X"}`;
@@ -27,13 +28,25 @@ allSquares.forEach((square) => {
     } else {
       currentTurn = currentTurn === "X" ? "O" : "X";
     }
+    if(gameHasEnded==true){
+      
+      autoRestartGane();
+    }
   });
 });
 
 function checkWinner() {
-  return winnerArray.some(combo =>
-    combo.every(index => boardArray[index] === currentTurn)
-  );
+  for (let i = 0; i < winnerArray.length; i++) {
+    let win = winnerArray[i];
+    if (
+      boardArray[win[0]] === boardArray[win[1]] &&
+      boardArray[win[1]] === boardArray[win[2]] &&
+      boardArray[win[0]] !== ""
+    ) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function declareWinner(winner) {
@@ -47,9 +60,21 @@ function declareDraw() {
   document.getElementById("reset").classList.add("now");
 }
 
+function autoRestartGane() {
+    setInterval(() => {
+        document.getElementById('turn').innerText+='.';
+    },1000)
+    setTimeout(() => {
+      window.location.reload();
+    },3000)
+     let randomIndex = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+    allSquares[randomIndex].click();
+  }
+   
+
 document.querySelector("#reset").addEventListener("click", () => {
-  boardArray.fill("");
-  allSquares.forEach(square => {
+  boardArray = ["", "", "", "", "", "", "", "", ""];
+  allSquares.forEach((square) => {
     square.innerHTML = "";
     square.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
   });
