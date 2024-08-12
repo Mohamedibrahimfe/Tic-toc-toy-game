@@ -9,24 +9,22 @@ body{
 }
 .title{
     background-color: rgba(255, 255, 255, 0.2);
-    padding: 15px;
+    padding: 10px;
     border-radius: 30px;
     line-height: 2em;
     width: 40%;
-    font-size: 1.5em;
     margin: auto;
     transition: all 0.5s ease;
-    margin-top: 40px!important;
 }
 .title:hover{
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.808);
+    color: #000;
 }
 .out-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
 }
 .container{
     display: flex;
@@ -46,16 +44,17 @@ body{
 .card .player{
     font-weight: bold;
     background-color: rgba(240, 255, 255, 0.241);
-    padding: 15px;
+    padding: 1rem 6rem;
     border-radius: 30px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    transition: all 0.5s ease;
 }
-.card #turn{
+#turn{
     font-weight: bold;
     /* background-color: rgba(240, 255, 255, 0.241); */
-    padding: 15px;
+    /* padding: 1.5rem 6rem; */
     border-radius: 30px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 .all-squeres{
     display: grid;
@@ -78,11 +77,11 @@ body{
     font-size: 3rem;
     animation-duration: 2s; /* don't forget to set a duration! */
     animation: bounce; /* referring directly to the animation's @keyframe declaration */
-
-
+    transition: all 0.5s ease;
 }
-.square:hover{
-    background-color: rgba(255, 255, 255, 0.5);
+.player:hover{
+    background-color: rgba(255, 255, 255, 0.808);
+    color: #000;
 }
 #reset{
     background-color: rgba(255, 255, 255, 0.2);
@@ -112,7 +111,8 @@ button:hover{
   .lds-ring div:nth-child(3) {
     animation-delay: -0.15s;
   }
-  @keyframes lds-ring {
+/* animate border */
+@keyframes lds-ring {
     0% {
         border-top: 6px dashed rgb(255, 251, 0);
     }
@@ -125,10 +125,10 @@ button:hover{
     75% {
         border-left: 6px dashed rgb(255, 251, 0);
     }
-  }
+}
 @media (max-width: 600px) {
     .title{
-        width: 70%;
+        width: 50%;
     }
     .card{
         width: 70%;
@@ -137,20 +137,36 @@ button:hover{
         width: 100px;
         height: 100px;
     }
+    .player{
+        margin-bottom: 10px;
+        padding: 1rem 2rem!important;
+    }
     #turn{
         font-size: 0.8em;
         padding: 0;
         margin: 0;
         line-height: 1em;
     }
+    #reset{
+        margin-top: 10px;
+    }
 }
 @media (min-width: 600px) and (max-width: 1000px) {
     .card{
         width: 70%;
     }
+    .title{
+        width: 60%;
+    }
     .square{
         width: 150px;
         height: 150px;
+    }
+    .player{
+        margin-bottom: 10px;
+    }
+    #reset{
+        margin-top: 10px;
     }
 }
 @media (min-width: 1000px) {
@@ -158,18 +174,17 @@ button:hover{
         width: 40%;
     }
     .title{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        font-size: 5em;
+        font-size: 3em;
     }
     .player{
         font-size: 1.5em;
-        line-height: 1.5em;
+        line-height: 1.5em;        margin-bottom: 10px;
+        margin-bottom: 10px;
     }
     .square{
-        width: 200px;
-        height: 200px;
-        font-size: 10rem;
+        width: 160px;
+        height: 160px;
+        font-size: 8rem;
         font-style: italic;
         line-height: 200px;
         margin: 5px;
@@ -178,6 +193,16 @@ button:hover{
         margin-bottom: 10px;
         margin-top: 10px;
     }
+    #turn{
+        font-size: 1em;
+        padding: 0;
+        margin: 0;
+        line-height: 1em;
+    }
+    #reset{
+        margin-top: 10px;
+    }
+
 }
 .retry{
     background-color: rgba(255, 255, 255, 0.2);
