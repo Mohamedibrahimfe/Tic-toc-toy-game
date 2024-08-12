@@ -1,8 +1,9 @@
 body{
     background-color: black;
     color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-align: center;
+    font-family: "Delicious Handrawn", cursive;
+    font-weight: 400;
+    font-style: normal;    text-align: center;
     height: 100vh;
     overflow: hidden;
 }
@@ -15,6 +16,7 @@ body{
     font-size: 1.5em;
     margin: auto;
     transition: all 0.5s ease;
+    margin-top: 40px!important;
 }
 .title:hover{
     background-color: rgba(255, 255, 255, 0.5);
@@ -74,11 +76,15 @@ body{
     line-height: 2.5rem;
     font-weight: bold;
     font-size: 3rem;
+    animation-duration: 2s; /* don't forget to set a duration! */
+    animation: bounce; /* referring directly to the animation's @keyframe declaration */
+
+
 }
 .square:hover{
     background-color: rgba(255, 255, 255, 0.5);
 }
-button{
+#reset{
     background-color: rgba(255, 255, 255, 0.2);
     padding: 15px;
     border-radius: 30px;
@@ -88,9 +94,16 @@ button{
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 150px;
+    position: relative;
 }
 button:hover{
     background-color: rgba(255, 255, 255, 0.5);
+}
+#reset.now{
+    border: 4px dotted rgb(252, 248, 4);
+}
+#reset.now::after{
+
 }
 @media (max-width: 600px) {
     .title{
@@ -155,4 +168,11 @@ button:hover{
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 150px;
+}
+.my-element {
+    display: inline-block;
+    margin: 0 0.5rem;
+  
+    animation: bounce; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s; /* don't forget to set a duration! */
 }
